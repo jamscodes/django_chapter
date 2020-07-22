@@ -23,5 +23,7 @@ urlpatterns = [
     path('create/', include('my_app.urls')),
     path('<int:blog_id>/', include('my_app.urls')),
     path('edit/<int:blog_id>/', include('my_app.urls')),
-    path('<int:blog_id>/delete/', include('my_app.urls'))
+    path('<int:blog_id>/delete/', include('my_app.urls')),
+    path('linked-page.html/', include('my_app.urls')),
+    path('display-values.html/', include('my_app.urls'))
 ]

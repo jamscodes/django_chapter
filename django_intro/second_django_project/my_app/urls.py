@@ -6,5 +6,7 @@ urlpatterns = [
     path('create/', views.create),
     path('<int:blog_id>/', views.show),
     path('edit/<int:blog_id>/', views.edit),
-    path('<int:blog_id>/delete/', views.delete)
+    path('<int:blog_id>/delete/', views.delete),
+    path('linked-page.html/', views.linked_page),
+    path('display-values.html/', views.display_values)
 ]

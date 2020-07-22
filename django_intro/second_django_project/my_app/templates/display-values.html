@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div>
+        <h1>This is a page to display values passed through the "context" object</h1>
+        <p>Value 1: {{first_name}}</p>
+        <p>Value 2: {{last_name}}</p>
+        <p>Value 3: {{email}}</p>
+    </div>
+</body>
+</html>
