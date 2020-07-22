@@ -5,8 +5,19 @@
     <title>Display Time App</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="{% static 'js/scripts.js' %}"></script>
 </head>
 <body>
-    
+    <div id="content-wrapper">
+        <div class="border-wrap" id="heading-wrapper">
+            <h1>The current date and time:</h1>
+        </div>
+        
+        <div class="border-wrap" id="timestamp-wrapper">
+            <p><span id="date"></span></p>
+            <p><span id="time"></span></p>
+        </div>
+    </div>
 </body>
 </html>
