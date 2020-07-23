@@ -16,5 +16,6 @@ Including another URLconf
 from django.urls import path, include
 
 urlpatterns = [
-    path('', include('form_playground.urls'))
+    path('', include('form_playground.urls')),
+    path('', include('random_word.urls'))
 ]
