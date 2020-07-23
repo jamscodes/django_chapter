@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Playground</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="formWrapper">
+        <form action="/result/" method="post">
+            {% csrf_token %}
+            <div id="labelWrapper">
+                <p><label for="name">Your Name:</label></p>
+                <p><label for="dojo_location">Favorite type of rock:</label></p>
+            </div>
+            <div id="inputWrapper">
+                <input name="name" type="text" placeholder="E.g. 'John Doe'">
+                <select name="dojo_location">
+                    <option value="" disabled selected>-- Choose your favorite rock --</option>
+                    <option value="igneous">Igneous Rock</option>
+                    <option value="metamorphic">Metamorphic Rock</option>
+                    <option value="sedimentary">Sedimentary Rock</option>
+                    <option value="marble">Marble Rock</option>
+                </select>
+            </div>
+            <p><label for="message">Why is that your favorite type of rock?</label></p>
+            <textarea name="message" placeholder="My rock rocks because..."></textarea>
+            <button type="submit">Rock on!</button>
+        </form>
+    </div>
+</body>
+</html>

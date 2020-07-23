@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+p, input, textarea {
+    margin-bottom: 15px;
+}
+
+.formWrapper {
+    width: 900px;
+    margin: 100px auto;
+    padding: 30px;
+    border: solid 1px #000;
+}
+
+    .formWrapper form {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    #labelWrapper, #inputWrapper {
+        width: 50%;
+    }
+
+    input, select, textarea {
+        width: 100%;
+        padding: 5px;
+        box-sizing: border-box;
+    }
+
+    textarea {
+        height: 200px;
+    }
+
+    .formWrapper button {
+        margin-left: auto;
+        padding: 5px 10px;
+        background-color: #76A5AF;
+        color: #fff;
+        box-shadow: 3px 3px #000;
+    }
+
+    .formWrapper button:hover {
+        cursor: pointer;
+    }
