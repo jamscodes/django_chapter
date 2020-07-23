@@ -17,5 +17,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('', include('form_playground.urls')),
-    path('', include('random_word.urls'))
+    path('random_word/', include('random_word.urls'))
 ]
