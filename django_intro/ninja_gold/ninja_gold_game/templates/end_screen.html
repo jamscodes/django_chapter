@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>End Game</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h1>Game Complete!</h1>
+                {% if request.session.game_won %}
+                    <p>You have won by earning {{request.session.golds}} in {{request.session.round_num}} rounds!</p>
+                    <p>Congratulations!</p>
+                {% else %}
+                    <p>You have lost :( You earned {{request.session.golds}}/{{request.session.start_params.gold_limit}} golds in {{request.session.round_num}} rounds. Better luck next time!</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <a href="/reset/" class="button">Play Again!</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -13,17 +13,16 @@
         <div class="row mb-5">
             <div class="col-12 d-flex align-items-center">
                 <p class="mb-0">Your golds:</p>
-                <div id="gold_counter" class="ml-3 p-1 border border-dark">GOLDS</div>
+                <div id="gold_counter" class="ml-3 p-1 border border-dark">{{request.session.golds}}</div>
             </div>
         </div>
         <div class="row mb-5">
             <div class="col-3">
                 <div class="location p-3 pb-4 text-center border border-dark">
                     <h3>Farm</h3>
-                    <p>(earns X golds)</p>
-                    <form action="/process_money" method="POST">
-                        {% csrf_token %}
-                        <input type="hidden" name="farm" value="farm">
+                    <p>(earns 10-20 golds)</p>
+                    <form action="/process_money/" method="GET">
+                        <input type="hidden" name="location" value="farm">
                         <button>Find Golds!</button>
                     </form>
                 </div>
@@ -31,10 +30,9 @@
             <div class="col-3">
                 <div class="location p-3 pb-4 text-center border border-dark">
                     <h3>Cave</h3>
-                    <p>(earns X golds)</p>
-                    <form action="/process_money" method="POST">
-                        {% csrf_token %}
-                        <input type="hidden" name="cave" value="cave">
+                    <p>(earns 5-10 golds)</p>
+                    <form action="/process_money/" method="GET">
+                        <input type="hidden" name="location" value="cave">
                         <button>Find Golds!</button>
                     </form>
                 </div>
@@ -42,10 +40,9 @@
             <div class="col-3">
                 <div class="location p-3 pb-4 text-center border border-dark">
                     <h3>House</h3>
-                    <p>(earns X golds)</p>
-                    <form action="/process_money" method="POST">
-                        {% csrf_token %}
-                        <input type="hidden" name="house" value="house">
+                    <p>(earns 2-5 golds)</p>
+                    <form action="/process_money/" method="GET">
+                        <input type="hidden" name="location" value="house">
                         <button>Find Golds!</button>
                     </form>
                 </div>
@@ -53,10 +50,9 @@
             <div class="col-3">
                 <div class="location p-3 pb-4 text-center border border-dark">
                     <h3>Casino</h3>
-                    <p>(earns X golds)</p>
-                    <form action="/process_money" method="POST">
-                        {% csrf_token %}
-                        <input type="hidden" name="casino" value="casino">
+                    <p>(earns/loses 0-50 golds)</p>
+                    <form action="/process_money/" method="GET">
+                        <input type="hidden" name="location" value="casino">
                         <button>Find Golds!</button>
                     </form>
                 </div>
@@ -67,11 +63,63 @@
                 <p>Activities:</p>
             </div>
         </div>
+        <div class="row mb-3">
+            <div class="col-12">
+                <div id="activity_log" class="p-1 border border-dark">
+                    {% for log in request.session.logs %}
+                        <p class="mb-1">{{log}}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-12">
-                <div id="activity_log" class="p-1 border border-dark">Activity logs</div>
+                <a href="/reset/" id="reset_game" class="button">Reset Game</a>
             </div>
         </div>
     </div>
+    {% if request.session.game_start == False %}
+        <div id="start_game_modal" class="position-fixed">
+            <div class="container d-flex align-items-center h-100">
+                <div class="row w-100">
+                    <div class="col-12">
+                        <div id="start_modal" class="p-4 text-center">
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <h1>Welcome to the Ninja Gold Game!</h1>
+                                    <p>In this game you will visit different locations and collect (or lose!) golds as you go!</p>
+                                    <p>Before you start, please input some starting settings for your game:</p>
+                                </div>
+                            </div>
+                            <form action="/start_game/" method="POST">
+                                {% csrf_token %}
+                                <div class="row mb-4">
+                                    <div class="col-3 offset-2 p-2 border border-dark">
+                                        <p><label for="num_rounds">How many rounds would you like the game to go?</label></p>
+                                        <select name="num_rounds" id="num_rounds">
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                            <option value="20">20</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-3 offset-2 p-2 border border-dark">
+                                        <p><label for="gold_limit">How much golds do you want to try and collect?</label></p>
+                                        <input type="text" name="gold_limit" id="gold_limit">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 text-center">
+                                        <input type="submit" value="Let's Play!" id="start_game_button" class="button">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'scripts.js' %}"></script>
 </body>
 </html>
