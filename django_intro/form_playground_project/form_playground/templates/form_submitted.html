@@ -4,10 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 <body>
-    <p>Your form has been submitted!</p>
-    <p>Here is value 1: {{field_1}}</p>
-    <p>Here is value 2: {{field_2}}</p>
+    <div class="container border border-dark mt-5 p-4">
+        <div class="row">
+            <div class="col-12">
+                <h1>Your submitted info:</h1>
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col-6">
+                <p>Name:</p>
+                <p>Favorite rock:</p>
+                <p>You have multiple favorite rocks:</p>
+                <p>You've owned a pet rock in the past:</p>
+                <p>You own a pet rock now:</p>
+                <p>Message:</p>
+            </div>
+            <div class="col-6">
+                <p>{{name}}</p>
+                <p>{{fav_rock}}</p>
+                <p>{{mult_fav_rock}}</p>
+                <p>{{past_pet_rock}}</p>
+                <p>{{cur_pet_rock}}</p>
+                <p>{{message}}</p>
+            </div>
+        </div>
+        <a class="button" href="/">Go back</a>
+    </div>
 </body>
 </html>

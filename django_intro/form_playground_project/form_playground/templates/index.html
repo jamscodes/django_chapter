@@ -4,30 +4,71 @@
     <meta charset="UTF-8">
     <title>Form Playground</title>
     {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 <body>
-    <div class="formWrapper">
-        <form action="/result/" method="post">
-            {% csrf_token %}
-            <div id="labelWrapper">
-                <p><label for="name">Your Name:</label></p>
-                <p><label for="dojo_location">Favorite type of rock:</label></p>
+    <div class="container border border-dark mt-5 p-4">
+        <div class="row">
+            <div class="col-12">
+                <form action="/result/" method="post" class="d-flex flex-column">
+                    {% csrf_token %}
+                    <div class="row mb-3">
+                        <div class="col-6 d-flex align-items-center">
+                            <p class="mb-0"><label class="mb-0" for="name">Your Name:</label></p>
+                        </div>
+                        <div class="col-6">
+                            <input name="name" type="text" placeholder="E.g. 'John Doe'">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6 d-flex align-items-center">
+                            <p class="mb-0"><label class="mb-0" for="dojo_location">Favorite type of rock:</label></p>
+                        </div>
+                        <div class="col-6">
+                            <select name="fav_rock">
+                                <option value="" disabled selected>-- Choose your favorite rock --</option>
+                                <option value="igneous">Igneous Rock</option>
+                                <option value="metamorphic">Metamorphic Rock</option>
+                                <option value="sedimentary">Sedimentary Rock</option>
+                                <option value="marble">Marble Rock</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6 d-flex align-items-center">
+                            <p class="mb-0">You actually have multiple favorite types of rocks:</p>
+                        </div>
+                        <div class="col-6">
+                            <div class="d-flex align-items-center mr-3">
+                                <label class="mb-0 mr-2" for="mult_fav_rock">True</label>
+                                <input type="radio" name="mult_fav_rock">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6 d-flex align-items-center">
+                            <p class="mb-0">Check all that apply:</p>
+                        </div>
+                        <div class="col-6 d-flex">
+                            <div class="d-flex align-items-center mr-3">
+                                <label class="mb-0 mr-2" for="past_pet_rock">I have owned a pet rock</label>
+                                <input class="mr-4" type="checkbox" name="past_pet_rock">
+                                <label class="mb-0 mr-2" for="cur_pet_rock">I currently own a pet rock</label>
+                                <input type="checkbox" name="cur_pet_rock">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <p class="pb-2"><label class="mb-0" for="message">Why is that your favorite type of rock?</label></p>
+                            <textarea name="message" placeholder="My rock rocks because..."></textarea>
+                            <button type="submit">Rock on!</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div id="inputWrapper">
-                <input name="name" type="text" placeholder="E.g. 'John Doe'">
-                <select name="dojo_location">
-                    <option value="" disabled selected>-- Choose your favorite rock --</option>
-                    <option value="igneous">Igneous Rock</option>
-                    <option value="metamorphic">Metamorphic Rock</option>
-                    <option value="sedimentary">Sedimentary Rock</option>
-                    <option value="marble">Marble Rock</option>
-                </select>
-            </div>
-            <p><label for="message">Why is that your favorite type of rock?</label></p>
-            <textarea name="message" placeholder="My rock rocks because..."></textarea>
-            <button type="submit">Rock on!</button>
-        </form>
+        </div>
     </div>
 </body>
 </html>
