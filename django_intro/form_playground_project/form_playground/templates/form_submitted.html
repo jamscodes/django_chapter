@@ -25,12 +25,12 @@
                 <p>Message:</p>
             </div>
             <div class="col-6">
-                <p>{{name}}</p>
-                <p>{{fav_rock}}</p>
-                <p>{{mult_fav_rock}}</p>
-                <p>{{past_pet_rock}}</p>
-                <p>{{cur_pet_rock}}</p>
-                <p>{{message}}</p>
+                <p>{{request.session.name}}</p>
+                <p>{{request.session.fav_rock}}</p>
+                <p>{{request.session.mult_fav_rock}}</p>
+                <p>{{request.session.past_pet_rock}}</p>
+                <p>{{request.session.cur_pet_rock}}</p>
+                <p>{{request.session.message}}</p>
             </div>
         </div>
         <a class="button" href="/">Go back</a>
