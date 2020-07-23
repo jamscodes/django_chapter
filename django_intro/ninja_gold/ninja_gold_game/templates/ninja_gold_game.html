@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninja Gold Game</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row mb-5">
+            <div class="col-12 d-flex align-items-center">
+                <p class="mb-0">Your golds:</p>
+                <div id="gold_counter" class="ml-3 p-1 border border-dark">GOLDS</div>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-3">
+                <div class="location p-3 pb-4 text-center border border-dark">
+                    <h3>Farm</h3>
+                    <p>(earns X golds)</p>
+                    <form action="/process_money" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="farm" value="farm">
+                        <button>Find Golds!</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="location p-3 pb-4 text-center border border-dark">
+                    <h3>Cave</h3>
+                    <p>(earns X golds)</p>
+                    <form action="/process_money" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="cave" value="cave">
+                        <button>Find Golds!</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="location p-3 pb-4 text-center border border-dark">
+                    <h3>House</h3>
+                    <p>(earns X golds)</p>
+                    <form action="/process_money" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="house" value="house">
+                        <button>Find Golds!</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="location p-3 pb-4 text-center border border-dark">
+                    <h3>Casino</h3>
+                    <p>(earns X golds)</p>
+                    <form action="/process_money" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="casino" value="casino">
+                        <button>Find Golds!</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <p>Activities:</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div id="activity_log" class="p-1 border border-dark">Activity logs</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

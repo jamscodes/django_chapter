@@ -1,0 +1,21 @@
+#gold_counter {
+    width: 200px;
+}
+
+button {
+    width: 100px;
+    padding: 5px 10px;
+    background-color: #76A5AF;
+    text-align: center;
+    color: #fff;
+    border: none;
+    box-shadow: 3px 3px #000;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+#activity_log {
+    min-height: 200px;
+}
