@@ -12,18 +12,18 @@
     <div class="container mt-5 p-5 border border-dark">
         <div class="row">
             <div class="col-12">
-                <p class="text-center">Random Word (attempt #num)</p>
+                <p class="text-center">Random Word (attempt #{{request.session.a_count}})</p>
             </div>
         </div>
         <div class="row mb-3">
             <div class="col-4 offset-4 p-2 border border-dark">
-                <p class="text-center mb-0">Random Word</p>
+                <p class="text-center mb-0">{{request.session.rand_string}}</p>
             </div>
         </div>
         <div class="row">
             <div class="col-4 offset-4 d-flex justify-content-around">
-                <a href="#" class="button">Generate</a>
-                <a href="#" class="button">Reset</a>
+                <a href="./" class="button">Generate</a>
+                <a href="/reset/" class="button">Reset</a>
             </div>
         </div>
     </div>
