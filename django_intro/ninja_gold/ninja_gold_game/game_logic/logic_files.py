@@ -34,8 +34,10 @@ def log_events(amt, loc):
 def start_game(request):
     start_params = {
         'rounds': int(request.POST['num_rounds']),
-        'gold_limit': int(request.POST['gold_limit'])
+        'gold_limit': int(request.POST['gold_limit']),
+        'negative_limit': False
     }
+    start_params['negative_limit'] = check_negative_limit(start_params['gold_limit'])
     request.session['game_start'] = True
     request.session['logs'].insert(0, f"You have {start_params['rounds']} rounds to earn {start_params['gold_limit']} golds.")
     request.session['start_params'] = start_params
@@ -44,8 +46,18 @@ def start_game(request):
 def check_endgame(request, gold, round):
     start_params = request.session['start_params']
     
-    if gold >= start_params['gold_limit']:
+    if start_params['negative_limit'] == False:
+        if gold >= start_params['gold_limit']:
+            request.session['game_won'] = True
+            return True
+    elif gold <= start_params['gold_limit']:
         request.session['game_won'] = True
         return True
-    elif round >= start_params['rounds']:
+    
+    if round >= start_params['rounds']:
         return True
+
+def check_negative_limit(gold_limit):
+    if gold_limit < 0:
+        return True
+    return False

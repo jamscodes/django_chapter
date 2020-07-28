@@ -18,5 +18,6 @@ from django.urls import path, include, re_path
 urlpatterns = [
     path('blog/', include('my_app.urls')),
     path('surveys/', include('surveys.urls')),
-    path('', include('users.urls')),
+    path('', include('my_app.urls')),
+    re_path(r'/[.]*', include('users.urls')),
 ]

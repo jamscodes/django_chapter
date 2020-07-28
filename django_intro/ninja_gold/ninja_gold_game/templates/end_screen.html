@@ -13,6 +13,9 @@
             <div class="col-12 text-center">
                 <h1>Game Complete!</h1>
                 {% if request.session.game_won %}
+                    {% if request.session.start_params.negative_limit %}
+                        <p>You've discovered a secret way to win! Way to be creative!</p>
+                    {% endif %}
                     <p>You have won by earning {{request.session.golds}} in {{request.session.round_num}} rounds!</p>
                     <p>Congratulations!</p>
                 {% else %}
