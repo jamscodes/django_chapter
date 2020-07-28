@@ -18,8 +18,10 @@
                     {% endif %}
                     <p>You have won by earning {{request.session.golds}} in {{request.session.round_num}} rounds!</p>
                     <p>Congratulations!</p>
+                    <img src="{% static 'img/happy_ninja.png' %}" alt="Illustration of a happy ninja">
                 {% else %}
                     <p>You have lost :( You earned {{request.session.golds}}/{{request.session.start_params.gold_limit}} golds in {{request.session.round_num}} rounds. Better luck next time!</p>
+                    <img src="{% static 'img/sad_ninja.png' %}" alt="Illustration of a sad ninja">
                 {% endif %}
             </div>
         </div>

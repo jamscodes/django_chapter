@@ -33,3 +33,7 @@
         border: solid 10px #d3d3d3;
         border-radius: 10px;
     }
+
+img {
+    width: 300px;
+}
