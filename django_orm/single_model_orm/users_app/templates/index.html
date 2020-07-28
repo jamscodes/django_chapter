@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2>All the Users</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Age</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{user.id}}</td>
+                                <td>{{user.first_name}} {{user.last_name}}</td>
+                                <td>{{user.email_address}}</td>
+                                <td>{{user.age}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row mt-5 mb-3 pt-4 border-top border-dark">
+            <div class="col-12 text-center">
+                <h2>Add a User</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8 offset-2">
+                <form action="/add_user/" method="POST">
+                    {% csrf_token %}
+                    <div class="row mb-3">
+                        <div class="col-6 d-flex justify-content-between align-items-center">
+                            <label class="mb-0" for="fname">First Name</label>
+                            <input type="text" id="fname" name="fname">
+                        </div>
+                        <div class="col-6 d-flex justify-content-between align-items-center">
+                            <label class="mb-0" for="lname">Last Name</label>
+                            <input type="text" id="lname" name="lname">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6 d-flex justify-content-between align-items-center">
+                            <label class="mb-0" for="email">Email</label>
+                            <input type="email" id="email" name="email">
+                        </div>
+                        <div class="col-6 d-flex justify-content-between align-items-center">
+                            <label class="mb-0" for="age">Age</label>
+                            <input type="text" id="age" name="age">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <input type="submit" value="Add">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
