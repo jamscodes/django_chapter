@@ -10,5 +10,10 @@ def index(request):
     return render(request, 'index.html', context)
 
 def add_user(request):
-    User.objects.create(first_name=request.POST['fname'], last_name=request.POST['lname'], email_address=request.POST['email'], age=request.POST['age'])
+    User.objects.create(
+        first_name=request.POST['fname'],
+        last_name=request.POST['lname'],
+        email_address=request.POST['email'],
+        age=request.POST['age']
+    )
     return redirect('/')
