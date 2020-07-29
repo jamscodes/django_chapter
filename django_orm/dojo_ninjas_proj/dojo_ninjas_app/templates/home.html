@@ -66,9 +66,9 @@
             <div class="col-12">
                 <h2 class="text-center">All the Dojos</h2>
             </div>
-            <div class="col-6 offset-3">
+            <div class="col-8 offset-2">
                 {% for dojo in dojos %}
-                <h4>Ninjas at the {{dojo.name}} - <a href="/delete_dojo/{{dojo.id}}/">Delete Dojo</a></h3>
+                <h4>There are {{dojo.ninjas.all|length}} ninja(s) at the {{dojo.name}} | <a href="/delete_dojo/{{dojo.id}}/">Delete Dojo</a></h4>
                 <ul>
                     {% for ninja in dojo.ninjas.all %}
                     <li>{{ninja.first_name}} {{ninja.last_name}}</li>
@@ -78,5 +78,8 @@
             </div>
         </div>
     </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{% static 'scripts.js' %}"></script>
 </body>
 </html>

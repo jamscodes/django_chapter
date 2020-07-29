@@ -6,7 +6,6 @@ from .models import Dojo, Ninja
 def index(request):
     context = {
         'dojos': Dojo.objects.all(),
-        'ninjas': Ninja.objects.all()
     }
     return render(request, 'home.html', context)
 
