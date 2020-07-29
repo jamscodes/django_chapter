@@ -25,3 +25,8 @@ def add_ninja(request):
         last_name=request.POST['n_l_name']
     )
     return redirect('/')
+
+def delete_dojo(request, id):
+    del_dojo = Dojo.objects.get(id=id)
+    del_dojo.delete()
+    return redirect('/')
