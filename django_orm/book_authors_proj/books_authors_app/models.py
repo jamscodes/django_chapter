@@ -7,7 +7,7 @@ class Book(models.Model):
     desc = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    # authors = Author.objects.all()
+    # Authors = Author.objects.all()
 
     def __repr__(self):
         return f'Title: {self.title}'

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Information</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+                <p class="mr-4"><a href="/books/">All Books</a></p>
+                <p><a href="/authors/">All Authors</a></p>
+            </div>
+            <div class="col-6">
+                <h1>{{book.title}}</h1>
+                <p><b>ID: {{book.id}}</b></p>
+                <p><b>Description:</b> {{book.desc}}</p>
+                <p><b>Authors:</b></p>
+                <ul>
+                    {% for author in book.Authors.all %}
+                    <li>{{author.first_name}} {{author.last_name}}</li>
+                    {% endfor %}
+                </ul>
+                <form action="/add_auth_to_book/" method="POST" class="d-flex">
+                    {% csrf_token %}
+                    <input type="hidden" name="book_id" value="{{book.id}}">
+                    <select name="author" id="author">
+                        <option value="" disabled selected>-- Select an Author --</option>
+                        {% for author in authors %}
+                            {% if author not in book.Authors.all %}
+                            <option value="{{author.id}}">{{author.first_name}} {{author.last_name}}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    <input type="submit" value="Add" class="ml-2">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
