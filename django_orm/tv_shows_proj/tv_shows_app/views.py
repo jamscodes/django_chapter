@@ -5,7 +5,7 @@ from .models import Movie
 
 def shows(request):
     context = {
-        'shows': 'shows' # needs to be the queryset of all shows
+        'shows': Movie.objects.all()
     }
     return render(request, 'shows.html', context)
 
