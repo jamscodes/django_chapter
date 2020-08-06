@@ -9,20 +9,20 @@
     <div class="container pt-5">
         <div class="row mb-5">
             <div class="col-12 d-flex mb-4 justify-content-between align-items-center">
-                <h1>TV Show {{show_id}}</h1>
+                <h1>TV Show {{show.id}}</h1>
                 <p class="mb-0"><a href="/shows/">Go Back</a></p>
             </div>
             <div class="col-12">
-                <p><b>Title:</b> {placeholder for showname}</p>
-                <p><b>Network:</b> {placeholder for network}</p>
-                <p><b>Release Date:</b> {placeholder for release date}</p>
-                <p><b>Description:</b> {placeholder for description}</p>
+                <p><b>Title:</b> {{show.title}}</p>
+                <p><b>Network:</b> {{show.network}}</p>
+                <p><b>Release Date:</b> {{show.release_date}}</p>
+                <p><b>Description:</b> {{show.desc}}</p>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <p>Last updated: {placeholder for updated_at}</p>
-                <p><a href="/shows/{showid}/edit/">Edit</a> | <a href="/shows/{showid}/delete/">Delete</a></p>
+                <p>Last updated: {{show.updated_at}}</p>
+                <p><a href="/shows/{{show.id}}/edit/">Edit</a> | <a href="/shows/{{show.id}}/delete/">Delete</a></p>
             </div>
         </div>
     </div>

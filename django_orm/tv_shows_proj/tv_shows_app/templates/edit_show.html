@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit a Show</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col-12 d-flex mb-4 justify-content-between align-items-center">
+                <h1>Edit Show {{show.id}}</h1>
+                <p class="mb-0"><a href="/shows/">Go Back</a></p>
+            </div>
+            <div class="col-6 offset-3 mb-3">
+                <form action="/edit_show/" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="show_id" value="{{show.id}}">
+                    <div class="col-12 mb-3">
+                        <label for="title">Title</label>
+                        <input type="text" name="title" id="title" class="w-100" value="{{show.title}}">
+                    </div>
+                    <div class="col-12 mb-3 d-flex justify-content-between">
+                        <div class="w-50 mr-2">
+                            <label for="network">Network</label>
+                            <input type="text" name="network" id="network" class="w-100" value="{{show.network}}">
+                        </div>
+                        <div class="w-50">
+                            <label for="rel_date">Release Date</label>
+                            <input type="date" name="rel_date" id="rel_date" class="w-100">
+                        </div>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label for="desc">Description</label>
+                        <textarea name="desc" id="desc" class="w-100">{{show.desc}}</textarea>
+                    </div>
+                    <div class="col-12 text-center">
+                        <input type="submit" value="Edit">
+                    </div>
+                </form>
+            </div>
+            <div class="col-12 text-center">
+                <p><a href="/shows/{{show.id}}/">Go to Show</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
