@@ -13,6 +13,13 @@
                 <p class="mb-0"><a href="/shows/">Go Back</a></p>
             </div>
             <div class="col-6 offset-3 mb-3">
+                {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                    <li>{{message}}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
                 <form action="/edit_show/" method="POST">
                     {% csrf_token %}
                     <input type="hidden" name="show_id" value="{{show.id}}">
