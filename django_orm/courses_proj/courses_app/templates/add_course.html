@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a student to all bootcamp courses</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container pt-5">
+        <div class="row mb-5">
+            <div class="col-12">
+                <h1 class="mb-4">Add a new course</h1>
+                <div class="row">
+                    <div class="col-6">
+                        {% if messages %}
+                            <ul>
+                                {% for message in messages %}
+                                <li>{{message}}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        <form action="/add_course/" method="POST">
+                            {% csrf_token %}
+                            <div class="row d-flex justify-content-between mb-3">
+                                <label for="name">Name:</label>
+                                <input type="text" name="name" id="name" class="w-75">
+                            </div>
+                            <div class="row d-flex justify-content-between mb-3">
+                                <label for="desc">Description:</label>
+                                <textarea name="desc" id="desc" class="w-75"></textarea>
+                            </div>
+                            <div class="row d-flex justify-content-end">
+                                <input type="submit" value="Add">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Course Name</th>
+                            <th>Description</th>
+                            <th>Date Added</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for course in courses %}
+                        <tr>
+                            <td>{{course.name}}</td>
+                            <td>{{course.description.desc}}</td>
+                            <td>{{course.created_at}}</td>
+                            <td><a href="/courses/delete/{{course.id}}/">Delete</a> | <a href="/courses/comments/{{course.id}}/">Comment</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
