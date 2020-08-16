@@ -28,12 +28,23 @@ def register(request):
         f_name = request.POST['f_name'],
         l_name = request.POST['l_name'],
         email = request.POST['email'],
+        dob = request.POST['dob'],
         password = pw_hash
     )
 
-    request.session['logged_user'] = User.objects.get(email = request.POST['email'])
+    request.session['logged_user'] = User.objects.get(email = request.POST['email']).f_name
 
     return redirect('/success/')
+
+def check_email(request):
+    context = {
+        'found': False
+    }
+
+    if len(User.objects.filter(email = request.POST['email'])) > 0:
+        context['found'] = True
+
+    return render(request, 'partials/email_found.html', context)
 
 def login(request):
     pw = request.POST['pw']
