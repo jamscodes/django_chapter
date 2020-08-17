@@ -32,6 +32,8 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
+    # messages = Message.objects.all()
+    # comments = Comment.objects.all()
 
     def __repr__(self):
         return f'User: {self.f_name} {self.l_name}'

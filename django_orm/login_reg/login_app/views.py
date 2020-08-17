@@ -1,17 +1,16 @@
 from django.shortcuts import render, redirect
 from .models import User
 from django.contrib import messages
-import bcrypt
+import bcrypt, logging
+
+logger = logging.getLogger(__name__)
 
 # Create your views here.
 
 def index(request):
     return render(request, 'login.html')
 
-def success(request):
-    if 'logged_user' in request.session:
-        return render(request, 'welcome.html')
-    return redirect('/')
+
 
 def register(request):
     errors = User.objects.reg_validation(request.POST)
@@ -32,9 +31,13 @@ def register(request):
         password = pw_hash
     )
 
-    request.session['logged_user'] = User.objects.get(email = request.POST['email']).f_name
+    lu = User.objects.get(email = request.POST['email'])
 
-    return redirect('/success/')
+    request.session['logged_user_name'], request.session['logged_user_id'] = lu.f_name, lu.id
+
+    return redirect('/wall/')
+
+
 
 def check_email(request):
     context = {
@@ -46,16 +49,20 @@ def check_email(request):
 
     return render(request, 'partials/email_found.html', context)
 
+
+
 def login(request):
     pw = request.POST['pw']
     user = User.objects.filter(email = request.POST['email'])
 
     if len(user) > 0 and bcrypt.checkpw(pw.encode(), user[0].password.encode()):
-        request.session['logged_user'] = user[0].f_name
-        return redirect('/success/')
+        request.session['logged_user_name'], request.session['logged_user_id'] = user[0].f_name, user[0].id
+        return redirect('/wall/')
     else:
         messages.error(request, 'Email or password is incorrect')
         return redirect('/')
+
+
 
 def logout(request):
     request.session.flush()
