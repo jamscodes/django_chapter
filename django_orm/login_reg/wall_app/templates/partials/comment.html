@@ -1,0 +1,11 @@
+<div class="col-12" id="comments">
+    {% for comment in message.comments.all %}
+    <div class="col-11 offset-1 mb-3">
+        <p class="mb-1"><b>{{comment.user.f_name}} {{comment.user.l_name}} - {{comment.updated_at}}</b></p>
+        <p class="px-2">{{comment.content}}</p>
+        {% if comment.user.id == request.session.logged_user_id %}
+        <p><a href="/wall/delete/comment/{{comment.id}}/">Delete Comment</a></p>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
