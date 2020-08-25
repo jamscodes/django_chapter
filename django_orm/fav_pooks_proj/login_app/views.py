@@ -33,7 +33,7 @@ def register(request):
 
     lu = User.objects.get(email = request.POST['email'])
 
-    request.session['logged_user_name'], request.session['logged_user_id'] = lu.f_name, lu.id
+    request.session['logged_user_id'], request.session['logged_user_name'] = lu.id, lu.f_name
 
     return redirect('/books/')
 
@@ -56,7 +56,7 @@ def login(request):
     user = User.objects.filter(email = request.POST['email'])
 
     if len(user) > 0 and bcrypt.checkpw(pw.encode(), user[0].password.encode()):
-        request.session['logged_user_name'], request.session['logged_user_id'] = user[0].f_name, user[0].id
+        request.session['logged_user_id'], request.session['logged_user_name'] = user[0].id, user[0].f_name
         return redirect('/books/')
     elif len(user) == 0:
         messages.error(request, 'Email is not associated with an existing account')

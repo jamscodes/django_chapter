@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{book.title}}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container-fluid mb-5 p-4 border-bottom border-dark">
+        <div class="row">
+            <div class="col-6 d-flex align-items-center">
+                <h1 class="mb-0">Welcome, {{request.session.logged_user_name}}</h1>
+            </div>
+            <div class="col-6 d-flex justify-content-end align-items-center">
+                <p class="mb-0 mr-5"><a href="/books/user-dashboard/">User Dashboard</a></p>
+                <p class="mb-0 mr-5"><a href="/books/">Books Dashboard</a></p>
+                <p class="mb-0"><a href="/logout/">Logout</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <form action="/books/edit_book/{{book.id}}/" method="POST" id="edit_book_form">
+                    {% csrf_token %}
+                    <p class="text-danger d-none w-100" id="b_title_err">Book should have a title</p>
+                    <input type="text" name="b_title" class="w-50" id="b_title" value="{{book.title}}">
+                    <p>Added by: {{book.added_by.f_name}} {{book.added_by.l_name}}</p>
+                    <p>Added on: {{book.created_at}}</p>
+                    <p>Last updated on: {{book.updated_at}}</p>
+                    <p class="text-danger d-none w-100" id="b_desc_err">Book description should be at least 5 characters long</p>
+                    <textarea name="b_desc" class="w-50" id="b_desc">{{book.desc}}</textarea>
+                    <div class="row mt-3">
+                        <input type="submit" value="Edit" class="btn btn-primary mr-4">
+                        <a href="/books/delete/{{book.id}}" class="btn btn-danger">Delete</a>
+                    </div>
+                </form>
+            </div>
+            <div class="col-6">
+                <h2>Users Who Like This Book:</h2>
+                <ul>
+                    {% for user in book.favorited_by.all %}
+                    <li>{{user.f_name}} {{user.l_name}}</li>
+                    {% endfor %}
+                </ul>
+                <p><i>Added by: {{book.added_by.f_name}} {{book.added_by.l_name}}</i></p>
+                {% if book in logged_user.favorite_books.all %}
+                <p><a href="/books/unfavorite/{{book.id}}/">Unfavorite This Book</a></p>
+                {% else %}
+                <p><a href="/books/favorite/{{book.id}}/">Favorite This Book</a></p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

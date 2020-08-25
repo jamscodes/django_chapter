@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{request.session.logged_user_name}}'s Favorite Books</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container-fluid mb-5 p-4 border-bottom border-dark">
+        <div class="row">
+            <div class="col-6 d-flex align-items-center">
+                <h1 class="mb-0">Welcome, {{request.session.logged_user_name}}</h1>
+            </div>
+            <div class="col-6 d-flex justify-content-end align-items-center">
+                <p class="mb-0 mr-5"><a href="/books/">Books Dashboard</a></p>
+                <p class="mb-0"><a href="/logout/">Logout</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <h2>Your Favorite Books</h2>
+                {% for book in user.favorite_books.all %}
+                <div class="row p-3 mb-4">
+                    <div class="col-12 border-bottom border-dark">
+                        <h3>{{book.title}}</h3>
+                        <p>Added by: {{book.added_by.f_name}} {{book.added_by.l_name}}</p>
+                        <p>Added on: {{book.created_at}}</p>
+                        <p>Last updated on: {{book.updated_at}}</p>
+                        <p>Description: {{book.desc}}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="col-6">
+                <h2>Books You've Added</h2>
+                {% for book in user.books_added.all %}
+                <div class="row p-3 mb-4">
+                    <div class="col-12 border-bottom border-dark">
+                        <h3>{{book.title}}</h3>
+                        <p>Added by: {{book.added_by.f_name}} {{book.added_by.l_name}}</p>
+                        <p>Added on: {{book.created_at}}</p>
+                        <p>Last updated on: {{book.updated_at}}</p>
+                        <p>Description: {{book.desc}}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

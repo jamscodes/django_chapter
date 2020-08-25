@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorite Books</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container-fluid mb-5 p-4 border-bottom border-dark">
+        <div class="row">
+            <div class="col-6 d-flex align-items-center">
+                <h1 class="mb-0">Welcome, {{request.session.logged_user_name}}</h1>
+            </div>
+            <div class="col-6 d-flex justify-content-end align-items-center">
+                <p class="mb-0 mr-5"><a href="/books/user-dashboard/">User Dashboard</a></p>
+                <p class="mb-0"><a href="/logout/">Logout</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-5">
+                <form action="/books/add_book/" method="POST" class="text-center" id="add_book_form">
+                    {% csrf_token %}
+                    <h2 class="mb-4">Add a Favorite Book</h2>
+                    <p class="text-danger d-none w-100" id="b_title_err">Book should have a title</p>
+                    <div class="col-12 d-flex mb-3 justify-content-between">
+                        <label for="b_title">Title</label>
+                        <input type="text" name="b_title" class="w-50" id="b_title">
+                    </div>
+                    <p class="text-danger d-none w-100" id="b_desc_err">Book description should be at least 5 characters long</p>
+                    <div class="col-12 d-flex mb-3 justify-content-between">
+                        <label for="b_desc">Description</label>
+                        <textarea name="b_desc" class="w-50" id="b_desc"></textarea>
+                    </div>
+                    <input type="submit" value="Add">
+                </form>
+            </div>
+            <div class="col-6 offset-1">
+                <h2 class="text-center mb-4">All Books</h2>
+                {% for book in books %}
+                <div class="row">
+                    <div class="col-12 mb-3 border-bottom border-dark">
+                        <h3>
+                            {% if book in logged_user.books_added.all %}
+                            <a href="/books/edit/{{book.id}}/">{{book.title}}</a>
+                            {% else %}
+                            <a href="/books/{{book.id}}/">{{book.title}}</a>
+                            {% endif %}
+                        </h3>
+                        <p><i>Added by: {{book.added_by.f_name}} {{book.added_by.l_name}}</i></p>
+                        {% if book in logged_user.favorite_books.all %}
+                        <p><a href="/books/favorite/{{book.id}}/">Unfavorite This Book</a></p>
+                        {% else %}
+                        <p><a href="/books/favorite/{{book.id}}/">Favorite This Book</a></p>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#add_book_form').submit(function() {
+                let err = false
+                if ($('#b_title').val() < 1) {
+                    $('#b_title_err').removeClass('d-none')
+                    err = true
+                } else {
+                    $('#b_title_err').addClass('d-none')
+                }
+                if ($('#b_desc').val() < 5 ) {
+                    $('#b_desc_err').removeClass('d-none')
+                    err = true
+                } else {
+                    $('#b_desc_err').addClass('d-none')
+                }
+                if (err) {
+                    return false
+                }
+            })
+        })
+    </script>
+</body>
+</html>
